@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Foods type
+enum FoodCategory {
+  Proteins
+  carbohydrates
+  minerals
+  vitamins
+  fats
+}
+
+// Food
+model Foods {
+  id           String       @id @default(cuid())
+  name         String       @unique
+  calories     Float
+  carb         Float
+  protein      Float
+  fat          Float
+  description  String?      @default("")
+  foodCategory FoodCategory
+  image        String?      @default("")
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @default(now())
+  updatedBy    String
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+// Activity Level Type
+enum activityLevel {
+  little
+  medium
+  alot
+}
+
+// Exercise goals
+enum ExerciseGoal {
+  LoseWeight
+  GainWeight
+  Maintain
+}
+
+// users
+model Users {
+  id                 String        @id @default(cuid())
+  name               String        @unique
+  accName            String        @unique
+  password           String
+  email              String
+  gender             Gender
+  age                Int
+  height             Int
+  weight             Int
+  profileImg         String
+  activityLevel      activityLevel
+  goal               ExerciseGoal
+  tdee               Int
+  isActive           Boolean       @default(true)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @default(now())
+}
+
+enum MealType {
+  MORNING
+  AFTER_NOON
+  EVENING
+  SNACKS
+}
+
+// Foods Eaten
+model FoodEaten {
+  id        String   @unique @default(cuid())
+  userId    String
+  foodId    String
+  mealType  MealType
+  quantity  Int      @default(0)
+  notes     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+// Favorite food list
+model UserFavFoods {
+  id        String   @unique @default(cuid())
+  userId    String
+  foodId    String
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @unique @default(cuid())
+  userId    String
+  message   String
+  type      String
+  createdAt DateTime @default(now())
+}
+
+// Muscle Type
+enum MuscleType {
+  Chest
+  Shoulder
+  Leg
+  Trisep
+  Bicep
+  Forearm
+  Back
+  Calf
+}
+
+// Workout Difficulty
+enum WorkoutDifficulty {
+  Beginner
+  Intermediate
+  Advanced
+}
+
+enum WorkoutEquipment {
+  equipmentc
+}
+
+//enum WorkoutEquipment
+
+model Workout {
+  id          String            @unique @default(cuid())
+  name        String            @unique
+  detail      String
+  muscle      MuscleType
+  calorieBurn Int
+  difficulty  WorkoutDifficulty
+  //equipment 
+  image       String
+  video       String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @default(now())
+}
+
+// User Favorite Workout
+model FavWorkout {
+  id        String   @unique @default(cuid())
+  userId    String
+  workoutId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+// User Activitys
+model Activities {
+  id        String   @unique @default(cuid())
+  userId    String
+  workoutId String
+  sets      Int
+  reps      Int
+  weight    Float
+  duration  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
