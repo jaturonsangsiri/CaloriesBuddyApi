@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional, IsEmail, IsDate, IsBoolean, MaxLength} from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsEmail, IsBoolean, MaxLength} from 'class-validator';
 import { activityLevel, ExerciseGoal, Gender } from 'generated/prisma';
 
 export class CreateUserDto {
@@ -58,10 +58,8 @@ export class CreateUserDto {
     isActive: boolean;
 
     @IsOptional()
-    @IsDate()
     createdAt: Date;
 
     @IsOptional()
-    @IsDate()
     updatedAt: Date;
 }

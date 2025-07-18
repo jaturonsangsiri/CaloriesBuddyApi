@@ -33,6 +33,7 @@ export class FoodsService {
 
   async update(id: string, updateFoodDto: UpdateFoodDto) {
     await this.prisma.foods.update({where: { id }, data: updateFoodDto});
+    return { message: 'Updated food successfull!' };
   }
 
   async delete(id: string) {
