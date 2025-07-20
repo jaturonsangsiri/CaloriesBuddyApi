@@ -1,0 +1,69 @@
+ตั้งค่าโปรเจ็กต์ใหม่ด้วย Nest CLI ติดตั้งผ่าน npm
+npm i -g @nestjs/cli
+
+สร้างโปรเจ็กใหม่
+nest new nest-starter
+
+รันโปรเจ็คที่ localhost:3000
+npm run startnest
+
+สร้าง controller
+nest generate controller products
+
+สร้าง service
+nest generate service products
+
+สร้าง module
+nest generate module products
+
+รีคอมไพล์และโหลดเซิร์ฟเวอร์ใหม่
+npm run start:dev
+
+สร้าง mongodb โดยใช้ docker-compose.yml
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+    driver: local
+
+docker exec -it nest-starter-mongo-1 bash
+mongosh -u root -p
+
+ให้ใส่รหัสผ่านในตัวเซ็น Enter password
+example
+
+
+ทำการ run docker ส่ง NestJS ขึ้น Docker
+docker-compose up -d
+
+ต่อกับ Database mongoDB ใช้ NestJS package 
+npm i @nestjs/mongoose mongoose
+
+สร้าง CRUD ทั้งหมดโดยไม่ต้องสร้างทีละตัวแทนใช้
+nest g resource products
+
+ใส่ลงใน app.modules
+import { MongooseModule } from '@nestjs/mongoose';
+
+@Module({
+    imports: [MongooseModule.forRoot('mongodb:root:example@localhost:27017/testNestJS?authSource=admin')],
+
+
+
+ทำเรื่องของ Validation ข้อมูล
+npm i --save class-validator class-transformer
+
+// migrate postgresql with prisma
+npx prisma migrate dev --name addFoodFavDatabase3

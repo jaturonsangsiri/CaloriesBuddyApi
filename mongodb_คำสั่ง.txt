@@ -1,0 +1,203 @@
+เชื่อม mongodb ใน docker ของ root 
+docker exec -it nest-starter-mongo-1 bash
+mongosh -u root -p
+
+รหัสผ่าน:
+example
+
+ใช้ Database ชื่อ testNestJS
+use testNestJS
+
+แสดง cllections ทั้งหมด (คิดว่าเป็น Tables)
+show collections
+
+เอาข้อมูลเข้า collection users
+db.users.insertOne({
+"name": "jaturon",
+"password": "1234",
+"email": "test@hotmail.com",
+"gender": "ชาย",
+"age": 25,
+"height": 0,
+"weight": 0,
+"profileImg": "",
+"activityLevel": "",
+"goal": "",
+"tdee": 0, 
+"username": "",
+"isActive": "true",
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection users_eated
+db.users_eated.insertOne({
+"id": 1,
+"userId": 1,
+"foodId": 1,
+"mealType": "เช้า",
+"quantity": 1,
+"note": "",
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection users_fav
+db.foodfavorites.insertOne({
+"id": 1,
+"userId": 1,
+"foodId": 1,
+"createdAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection foods
+db.foods.insertOne({
+"id": 1,
+"name": "ข้าวสวย 100 กรัม",
+"calories": 130,
+"protien": 2.7,
+"carb": 28.2,
+"fat": 0.3,
+"foodCategory": "วัตถุดิบ",
+"image": "",
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection notification
+db.notification.insertOne({
+"userId": 1,
+"type": "",
+"message": "เพิ่มรายการอาหารใหม่สำเร็จ ข้าวสวย",
+"createdAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection workout
+db.workout.insertOne({
+"id": 1,
+"name": "bench press",
+"detail": "การออกกำลังกายที่ใช้เพื่อเสริมสร้างความแข็งแรงให้กับกล้ามเนื้อส่วนบนของร่างกาย",
+"muscle": "อก",
+"calorieBurn": 0,
+"difficulty": "beginner",
+"equipment": "barbell",
+"image": "",
+"video": "",
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection workout_fav
+db.users_workout_fav.insertOne({
+"id": 1,
+"userId": 1,
+"workoutId": 1,
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+
+เอาข้อมูลเข้า collection activities
+db.activities.insertOne({
+"id": 1,
+"userId": 1,
+"workoutId": 1,
+"sets": 4,
+"reps": 12,
+"weight": 10.0,
+"duration": 0,
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+เอาข้อมูลเข้า collection meal
+db.meal.insertOne({
+"userId": 1,
+"mealType": "เช้า",
+"calories": 650,
+"createdAt": new Date(),
+"updatedAt": new Date()
+})
+
+เอาข้อมูลเข้า collection meal_food
+db.meal_food.insertOne({
+"mealId": 1,
+"foodId": 1,
+"note": "",
+"quantity": 1
+})
+
+
+ลบ collection ที่ไม่ได้ใช้
+db.users_eated.drop()
+
+
+จัดรูปแบบการแสดงข้อมูล javascript
+db.foodfavorites.aggregate([
+  {
+    $match: {
+      foodId: new ObjectId(id)  // แทนที่ด้วย userId ที่ต้องการ
+    }
+  },
+  {
+    $lookup: {
+      from: "foods",
+      localField: "foodId",        // foodId ใน users_fav
+      foreignField: "id",          // id ใน foods
+      as: "foodData"
+    }
+  },
+  {
+    $unwind: "$foodData"          // แกะข้อมูลอาหารออกมา
+  },
+  {
+  $project: {
+    // 1 หมายความว่า แสดง field นี้
+    userId: 1,                    // แสดง userId
+    foodId: 1,                   // แสดง foodId
+    
+    // 0 หมายความว่า ซ่อน field นี้  
+    _id: 0,                      // ซ่อน _id
+    
+    // เปลี่ยนชื่อ field
+    favId: "$_id",               // เอา _id มาใส่ใน favId
+    favoriteDate: "$create_at",   // เอา create_at มาใส่ใน favoriteDate
+    
+    // ดึงข้อมูลจาก nested object
+    foodName: "$foodData.name",   // เอา name จาก foodData
+    calories: "$foodData.calories",
+    
+    // สร้าง field ใหม่จากการคำนวณ
+    totalNutrients: { 
+      $add: ["$foodData.protein", "$foodData.carb", "$foodData.fat"] 
+    }
+  }
+},
+  {
+    $sort: {
+      create_at: -1               // เรียงตามวันที่เพิ่มล่าสุด
+    }
+  }
+])
+
+
+
+{
+        $project: {
+          userId: 1,
+          foodId: 1,
+          foodName: "$foodData.name",
+          calories: "$foodData.calories",
+          carb: "$foodData.carb",
+          protein: "$foodData.protein",
+          fat: "$foodData.fat",
+	  foodCategory: "$foodData.foodCategory"
+        }
+      },
+

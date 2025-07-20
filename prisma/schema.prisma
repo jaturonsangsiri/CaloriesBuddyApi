@@ -37,6 +37,9 @@ model Foods {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @default(now())
   updatedBy    String
+
+  foodEated FoodEaten[]
+  foodFav UserFavFoods[]
 }
 
 enum Gender {
@@ -60,22 +63,25 @@ enum ExerciseGoal {
 
 // users
 model Users {
-  id                 String        @id @default(cuid())
-  name               String        @unique
-  accName            String        @unique
-  password           String
-  email              String
-  gender             Gender
-  age                Int
-  height             Int
-  weight             Int
-  profileImg         String        @default("")
-  activityLevel      activityLevel @default(medium)
-  goal               ExerciseGoal  @default(LoseWeight)
-  tdee               Int           @default(0)
-  isActive           Boolean       @default(true)
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @default(now())
+  id            String        @id @default(cuid())
+  name          String        @unique
+  accName       String        @unique
+  password      String
+  email         String
+  gender        Gender
+  age           Int
+  height        Int
+  weight        Int
+  profileImg    String        @default("")
+  activityLevel activityLevel @default(medium)
+  goal          ExerciseGoal  @default(LoseWeight)
+  tdee          Int           @default(0)
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now())
+
+  foodEated FoodEaten[]
+  foodFav UserFavFoods[]
 }
 
 enum MealType {
@@ -88,28 +94,39 @@ enum MealType {
 // Foods Eaten
 model FoodEaten {
   id        String   @unique @default(cuid())
-  userId    String
-  foodId    String
   mealType  MealType
   quantity  Int      @default(0)
   notes     String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  userId String
+  user   Users  @relation(fields: [userId], references: [id])
+  foodId String
+  food   Foods  @relation(fields: [foodId], references: [id])
 }
 
 // Favorite food list
 model UserFavFoods {
   id        String   @unique @default(cuid())
   userId    String
+  user      Users    @relation(fields: [userId], references: [id])
   foodId    String
+  food      Foods     @relation(fields: [foodId], references: [id])
   createdAt DateTime @default(now())
+}
+
+enum NotificationType {
+  Regular      // สีเขียว หรือแยกสีย่อยเข้าไปอีก เพิ่มรายการอาหารสำเร็จ, มีกิจกรรมใหม่
+  Warnings     // สีเหลือง ชื่อของท่านไม่เหมาะสม กรุณาเปลี่ยนชื่อ
+  Alerts       // สีแดง กรุณายืนยันตัวตนเพื่อสมัครสมาชิกต่อไป
 }
 
 model Notification {
   id        String   @unique @default(cuid())
   userId    String
   message   String
-  type      String
+  type      NotificationType
   createdAt DateTime @default(now())
 }
 
