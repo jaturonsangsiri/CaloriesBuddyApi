@@ -39,7 +39,7 @@ model Foods {
   updatedBy    String
 
   foodEated FoodEaten[]
-  foodFav UserFavFoods[]
+  foodFav   UserFavFoods[]
 }
 
 enum Gender {
@@ -81,7 +81,7 @@ model Users {
   updatedAt     DateTime      @default(now())
 
   foodEated FoodEaten[]
-  foodFav UserFavFoods[]
+  foodFav   UserFavFoods[]
 }
 
 enum MealType {
@@ -112,22 +112,22 @@ model UserFavFoods {
   userId    String
   user      Users    @relation(fields: [userId], references: [id])
   foodId    String
-  food      Foods     @relation(fields: [foodId], references: [id])
+  food      Foods    @relation(fields: [foodId], references: [id])
   createdAt DateTime @default(now())
 }
 
 enum NotificationType {
-  Regular      // สีเขียว หรือแยกสีย่อยเข้าไปอีก เพิ่มรายการอาหารสำเร็จ, มีกิจกรรมใหม่
-  Warnings     // สีเหลือง ชื่อของท่านไม่เหมาะสม กรุณาเปลี่ยนชื่อ
-  Alerts       // สีแดง กรุณายืนยันตัวตนเพื่อสมัครสมาชิกต่อไป
+  Regular // สีเขียว หรือแยกสีย่อยเข้าไปอีก เพิ่มรายการอาหารสำเร็จ, มีกิจกรรมใหม่
+  Warnings // สีเหลือง ชื่อของท่านไม่เหมาะสม กรุณาเปลี่ยนชื่อ
+  Alerts // สีแดง กรุณายืนยันตัวตนเพื่อสมัครสมาชิกต่อไป
 }
 
 model Notification {
-  id        String   @unique @default(cuid())
+  id        String           @unique @default(cuid())
   userId    String
   message   String
   type      NotificationType
-  createdAt DateTime @default(now())
+  createdAt DateTime         @default(now())
 }
 
 // Muscle Type
@@ -150,10 +150,10 @@ enum WorkoutDifficulty {
 }
 
 enum WorkoutEquipment {
-  equipmentc
+  Dumbbell
+  Barbell
+  Incline_Bench
 }
-
-//enum WorkoutEquipment
 
 model Workout {
   id          String            @unique @default(cuid())
@@ -162,7 +162,7 @@ model Workout {
   muscle      MuscleType
   calorieBurn Int
   difficulty  WorkoutDifficulty
-  //equipment 
+  equipments  WorkoutEquipment
   image       String
   video       String
   createdAt   DateTime          @default(now())
