@@ -3,7 +3,6 @@ import { MealService } from './meal.service';
 import { CreateMealDto } from './dto/meal/create-meal.dto';
 import { UpdateMealDto } from './dto/meal/update-meal.dto';
 import { CreateAddMealDto } from './dto/add_meal/create-add-meal.dto';
-import { dmmf } from '@prisma/client';
 
 @Controller('meal')
 export class MealController {
