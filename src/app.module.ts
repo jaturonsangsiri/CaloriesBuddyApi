@@ -17,10 +17,13 @@ import { WorkoutService } from './workout/workout.service';
 import { ActivitiesController } from './activities/activities.controller';
 import { ActivitiesService } from './activities/activities.service';
 import { ActivitiesModule } from './activities/activities.module';
+import { MealController } from './meal/meal.controller';
+import { MealService } from './meal/meal.service';
+import { MealModule } from './meal/meal.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, FoodsModule, NotificationModule, WorkoutModule, ActivitiesModule],
-  controllers: [AppController, UsersController, FoodsController, NotificationController, WorkoutController, ActivitiesController],
-  providers: [AppService, UsersService, FoodsService, NotificationService, WorkoutService, ActivitiesService],
+  imports: [PrismaModule, UsersModule, FoodsModule, NotificationModule, WorkoutModule, ActivitiesModule, MealModule],
+  controllers: [AppController, UsersController, FoodsController, NotificationController, WorkoutController, ActivitiesController, MealController],
+  providers: [AppService, UsersService, FoodsService, NotificationService, WorkoutService, ActivitiesService, MealService],
 })
 export class AppModule {}

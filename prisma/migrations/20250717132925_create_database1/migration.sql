@@ -19,7 +19,7 @@ CREATE TYPE "activityLevel" AS ENUM ('little', 'medium', 'alot');
 CREATE TYPE "ExerciseGoal" AS ENUM ('LoseWeight', 'GainWeight', 'Maintain');
 
 -- CreateEnum
-CREATE TYPE "MealType" AS ENUM ('MORNING', 'AFTER_NOON', 'EVENING', 'SNACKS');
+CREATE TYPE "MealType" AS ENUM ('BREAKFAST', 'LUNCH', 'DINNER', 'SNACKS', 'LATE_NIGHT');
 
 -- CreateEnum
 CREATE TYPE "MuscleType" AS ENUM ('Chest', 'Shoulder', 'Leg', 'Trisep', 'Bicep', 'Forearm', 'Back', 'Calf');

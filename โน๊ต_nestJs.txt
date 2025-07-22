@@ -67,3 +67,10 @@ npm i --save class-validator class-transformer
 
 // migrate postgresql with prisma
 npx prisma migrate dev --name addFoodFavDatabase3
+
+// reset prisma migrate
+npx prisma migrate reset
+
+// Generate prisma client
+npx prisma generate
+

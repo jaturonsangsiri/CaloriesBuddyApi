@@ -38,8 +38,8 @@ model Foods {
   updatedAt    DateTime     @default(now())
   updatedBy    String
 
-  foodEated FoodEaten[]
-  foodFav   UserFavFoods[]
+  foodFav UserFavFoods[]
+  mealItem MealItem[]
 }
 
 enum Gender {
@@ -80,33 +80,45 @@ model Users {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @default(now())
 
-  foodEated FoodEaten[]
-  foodFav   UserFavFoods[]
+  meal          Meal[]
+  foodFav       UserFavFoods[]
   notifications Notification[]
-  workout Activities[]
-  favWorkout FavWorkout[]
+  workout       Activities[]
+  favWorkout    FavWorkout[]
 }
 
 enum MealType {
-  MORNING
-  AFTER_NOON
-  EVENING
+  BREAKFAST
+  LUNCH
+  DINNER
   SNACKS
+  LATE_NIGHT
 }
 
 // Foods Eaten
-model FoodEaten {
+model Meal {
   id        String   @unique @default(cuid())
-  mealType  MealType
-  quantity  Int      @default(0)
-  notes     String
+  type      MealType
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
   userId String
   user   Users  @relation(fields: [userId], references: [id])
-  foodId String
-  food   Foods  @relation(fields: [foodId], references: [id])
+  mealItems MealItem[]
+}
+
+// Meal Items
+model MealItem {
+  id        String   @unique @default(cuid())
+  quantity  Int      @default(0)
+  note      String?  @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  mealId    String
+  meal      Meal     @relation(fields: [mealId], references: [id])
+  foodId    String
+  food      Foods    @relation(fields: [foodId], references: [id])
 }
 
 // Favorite food list
@@ -127,7 +139,7 @@ enum NotificationType {
 
 model Notification {
   id        String           @unique @default(cuid())
-  userId    String           
+  userId    String
   user      Users            @relation(fields: [userId], references: [id])
   message   String
   type      NotificationType
@@ -171,7 +183,7 @@ model Workout {
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @default(now())
 
-  activities  Activities[]
+  activities Activities[]
   favWorkout FavWorkout[]
 }
 
