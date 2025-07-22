@@ -6,12 +6,13 @@ import { UpdateFoodDto } from './dto/food/update-food.dto';
 import { CreateFoodFavDto } from './dto/food_fav/create-food-fav.dto';
 import { UpdateFoodFavDto } from './dto/food_fav/update-food-fav.dto';
 
+const filterUser = {
+  select: {name: true, email: true, gender: true, age: true, height: true, weight: true, profileImg: true, activityLevel: true, goal: true, tdee: true, isActive: true}
+};
+
 @Injectable()
 export class FoodsService {
   constructor(private readonly prisma: PrismaService) {}
-  filterUser = {
-    select: {name: true, email: true, gender: true, age: true, height: true, weight: true, profileImg: true, activityLevel: true, goal: true, tdee: true, isActive: true}
-  };
 
   async findAll(filter: string) {
     let search = {};
@@ -31,7 +32,7 @@ export class FoodsService {
     return await this.prisma.userFavFoods.findMany({
       include: {
         food: true, 
-        user: this.filterUser
+        user: filterUser
       },
       where: {userId: id},
       orderBy: [{ createdAt: "desc" }]
@@ -48,7 +49,7 @@ export class FoodsService {
     return await this.prisma.foodEaten.findMany({
       include: {
         food: true, 
-        user: this.filterUser
+        user: filterUser
       },
       where: { userId: id },
       orderBy: [{ createdAt: "desc" }]

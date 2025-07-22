@@ -82,6 +82,9 @@ model Users {
 
   foodEated FoodEaten[]
   foodFav   UserFavFoods[]
+  notifications Notification[]
+  workout Activities[]
+  favWorkout FavWorkout[]
 }
 
 enum MealType {
@@ -124,7 +127,8 @@ enum NotificationType {
 
 model Notification {
   id        String           @unique @default(cuid())
-  userId    String
+  userId    String           
+  user      Users            @relation(fields: [userId], references: [id])
   message   String
   type      NotificationType
   createdAt DateTime         @default(now())
@@ -161,19 +165,23 @@ model Workout {
   detail      String
   muscle      MuscleType
   calorieBurn Int
-  difficulty  WorkoutDifficulty
-  equipments  WorkoutEquipment
+  difficulty  WorkoutDifficulty @default(Beginner)
   image       String
   video       String
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @default(now())
+
+  activities  Activities[]
+  favWorkout FavWorkout[]
 }
 
 // User Favorite Workout
 model FavWorkout {
   id        String   @unique @default(cuid())
   userId    String
+  user      Users    @relation(fields: [userId], references: [id])
   workoutId String
+  workout   Workout  @relation(fields: [workoutId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -182,10 +190,12 @@ model FavWorkout {
 model Activities {
   id        String   @unique @default(cuid())
   userId    String
+  user      Users    @relation(fields: [userId], references: [id])
   workoutId String
+  workout   Workout  @relation(fields: [workoutId], references: [id])
   sets      Int
   reps      Int
-  weight    Float
+  weight    Int
   duration  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

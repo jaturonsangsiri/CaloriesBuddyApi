@@ -14,10 +14,13 @@ import { NotificationService } from './notification/notification.service';
 import { WorkoutController } from './workout/workout.controller';
 import { WorkoutModule } from './workout/workout.module';
 import { WorkoutService } from './workout/workout.service';
+import { ActivitiesController } from './activities/activities.controller';
+import { ActivitiesService } from './activities/activities.service';
+import { ActivitiesModule } from './activities/activities.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, FoodsModule, NotificationModule, WorkoutModule],
-  controllers: [AppController, UsersController, FoodsController, NotificationController, WorkoutController],
-  providers: [AppService, UsersService, FoodsService, NotificationService, WorkoutService],
+  imports: [PrismaModule, UsersModule, FoodsModule, NotificationModule, WorkoutModule, ActivitiesModule],
+  controllers: [AppController, UsersController, FoodsController, NotificationController, WorkoutController, ActivitiesController],
+  providers: [AppService, UsersService, FoodsService, NotificationService, WorkoutService, ActivitiesService],
 })
 export class AppModule {}
