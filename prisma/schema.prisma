@@ -16,11 +16,11 @@ datasource db {
 
 // Foods type
 enum FoodCategory {
-  Proteins
-  carbohydrates
-  minerals
-  vitamins
-  fats
+  PROTEINS
+  CARBOHYDRATES
+  MINERALS
+  VITAMINS
+  FATS
 }
 
 // Food
@@ -49,16 +49,16 @@ enum Gender {
 
 // Activity Level Type
 enum activityLevel {
-  little
-  medium
-  alot
+  LITTLE
+  MEDIUM
+  ALOT
 }
 
 // Exercise goals
 enum ExerciseGoal {
-  LoseWeight
-  GainWeight
-  Maintain
+  LOSE_WEIGHT
+  GAIN_WEIGHT
+  MAINTAIN
 }
 
 // users
@@ -73,8 +73,8 @@ model Users {
   height        Int
   weight        Int
   profileImg    String        @default("")
-  activityLevel activityLevel @default(medium)
-  goal          ExerciseGoal  @default(LoseWeight)
+  activityLevel activityLevel @default(MEDIUM)
+  goal          ExerciseGoal  @default(LOSE_WEIGHT)
   tdee          Int           @default(0)
   isActive      Boolean       @default(true)
   createdAt     DateTime      @default(now())
@@ -132,9 +132,9 @@ model UserFavFoods {
 }
 
 enum NotificationType {
-  Regular // สีเขียว หรือแยกสีย่อยเข้าไปอีก เพิ่มรายการอาหารสำเร็จ, มีกิจกรรมใหม่
-  Warnings // สีเหลือง ชื่อของท่านไม่เหมาะสม กรุณาเปลี่ยนชื่อ
-  Alerts // สีแดง กรุณายืนยันตัวตนเพื่อสมัครสมาชิกต่อไป
+  REGULAR // สีเขียว หรือแยกสีย่อยเข้าไปอีก เพิ่มรายการอาหารสำเร็จ, มีกิจกรรมใหม่
+  WARNINGS // สีเหลือง ชื่อของท่านไม่เหมาะสม กรุณาเปลี่ยนชื่อ
+  ALERTS // สีแดง กรุณายืนยันตัวตนเพื่อสมัครสมาชิกต่อไป
 }
 
 model Notification {
@@ -148,27 +148,27 @@ model Notification {
 
 // Muscle Type
 enum MuscleType {
-  Chest
-  Shoulder
-  Leg
-  Trisep
-  Bicep
-  Forearm
-  Back
-  Calf
+  CHEST
+  SHOULDER
+  LEG
+  TRICEP
+  BICEP
+  FOREARM
+  BACK
+  CALF
 }
 
 // Workout Difficulty
 enum WorkoutDifficulty {
-  Beginner
-  Intermediate
-  Advanced
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
 }
 
 enum WorkoutEquipment {
-  Dumbbell
-  Barbell
-  Incline_Bench
+  DUMBBELL
+  BARBELL
+  INCLINE_BENCH
 }
 
 model Workout {
@@ -177,7 +177,7 @@ model Workout {
   detail      String
   muscle      MuscleType
   calorieBurn Int
-  difficulty  WorkoutDifficulty @default(Beginner)
+  difficulty  WorkoutDifficulty @default(BEGINNER)
   image       String
   video       String
   createdAt   DateTime          @default(now())
