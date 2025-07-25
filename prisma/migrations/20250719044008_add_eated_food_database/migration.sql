@@ -6,8 +6,8 @@
 
 */
 -- AlterTable
-ALTER TABLE "Users" ALTER COLUMN "activityLevel" SET DEFAULT 'medium',
-ALTER COLUMN "goal" SET DEFAULT 'LoseWeight',
+ALTER TABLE "Users" ALTER COLUMN "activityLevel" SET DEFAULT 'MEDIUM',
+ALTER COLUMN "goal" SET DEFAULT 'LOSE_WEIGHT',
 ALTER COLUMN "tdee" SET DEFAULT 0;
 
 -- CreateIndex

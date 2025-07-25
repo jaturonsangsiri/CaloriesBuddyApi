@@ -6,14 +6,14 @@
 */
 -- AlterEnum
 BEGIN;
-CREATE TYPE "WorkoutEquipment_new" AS ENUM ('Dumbbell', 'Barbell', 'Incline_Bench');
+CREATE TYPE "WorkoutEquipment_new" AS ENUM ('DUMBBELL', 'BARBELL', 'INCLINE_BENCH');
 ALTER TYPE "WorkoutEquipment" RENAME TO "WorkoutEquipment_old";
 ALTER TYPE "WorkoutEquipment_new" RENAME TO "WorkoutEquipment";
 DROP TYPE "WorkoutEquipment_old";
 COMMIT;
 
 -- AlterTable
-ALTER TABLE "Workout" ALTER COLUMN "difficulty" SET DEFAULT 'Beginner';
+ALTER TABLE "Workout" ALTER COLUMN "difficulty" SET DEFAULT 'BEGINNER';
 
 -- AddForeignKey
 ALTER TABLE "Notification" ADD CONSTRAINT "Notification_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -7,28 +7,25 @@
 
 */
 -- CreateEnum
-CREATE TYPE "FoodCategory" AS ENUM ('Proteins', 'carbohydrates', 'minerals', 'vitamins', 'fats');
+CREATE TYPE "FoodCategory" AS ENUM ('PROTEINS', 'CARBOHYDRATES', 'MINERALS', 'VITAMINS', 'FATS');
 
 -- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE');
 
 -- CreateEnum
-CREATE TYPE "activityLevel" AS ENUM ('little', 'medium', 'alot');
+CREATE TYPE "activityLevel" AS ENUM ('LITTLE', 'MEDIUM', 'ALOT');
 
 -- CreateEnum
-CREATE TYPE "ExerciseGoal" AS ENUM ('LoseWeight', 'GainWeight', 'Maintain');
+CREATE TYPE "ExerciseGoal" AS ENUM ('LOSE_WEIGHT', 'GAIN_WEIGHT', 'MAINTAIN');
 
 -- CreateEnum
 CREATE TYPE "MealType" AS ENUM ('BREAKFAST', 'LUNCH', 'DINNER', 'SNACKS', 'LATE_NIGHT');
 
 -- CreateEnum
-CREATE TYPE "MuscleType" AS ENUM ('Chest', 'Shoulder', 'Leg', 'Trisep', 'Bicep', 'Forearm', 'Back', 'Calf');
+CREATE TYPE "MuscleType" AS ENUM ('CHEST', 'SHOULDER', 'LEG', 'TRISEP', 'BICEP', 'FOREARM', 'BACK', 'CALF');
 
 -- CreateEnum
-CREATE TYPE "WorkoutDifficulty" AS ENUM ('Beginner', 'Intermediate', 'Advanced');
-
--- CreateEnum
-CREATE TYPE "WorkoutEquipment" AS ENUM ('equipmentc');
+CREATE TYPE "WorkoutDifficulty" AS ENUM ('BEGINNER', 'INTERMEDIATE', 'ADVANCED');
 
 -- AlterTable
 ALTER TABLE "Foods" DROP COLUMN "createBy",

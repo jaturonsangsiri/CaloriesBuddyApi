@@ -5,7 +5,7 @@
 
 */
 -- CreateEnum
-CREATE TYPE "NotificationType" AS ENUM ('Regular', 'Warnings', 'Alerts');
+CREATE TYPE "NotificationType" AS ENUM ('REGULAR', 'WARNINGS', 'ALERTS');
 
 -- AlterTable
 ALTER TABLE "Notification" DROP COLUMN "type",
