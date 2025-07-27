@@ -61,6 +61,12 @@ enum ExerciseGoal {
   MAINTAIN
 }
 
+enum Roles {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
 // users
 model Users {
   id            String        @id @default(cuid())
@@ -76,6 +82,7 @@ model Users {
   activityLevel activityLevel @default(MEDIUM)
   goal          ExerciseGoal  @default(LOSE_WEIGHT)
   tdee          Int           @default(0)
+  role          Roles         @default(USER)
   isActive      Boolean       @default(true)
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @default(now())

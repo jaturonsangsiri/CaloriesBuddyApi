@@ -2,11 +2,25 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatedUserDto } from './dto/update-user.dto';
-import { contains } from 'class-validator';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
+  filter = {
+    id: true,
+    name: true,
+    email: true,
+    gender: true,
+    age: true,
+    height: true,
+    weight: true,
+    profileImg: true,
+    activityLevel: true,
+    goal: true,
+    tdee: true,
+    role: true,
+    isActive: true
+  };
 
   async findAll(filter: string) {
     let search = {};
@@ -22,19 +36,7 @@ export class UsersService {
 
   async findOne(id: string) {
     const result = await this.prisma.users.findUnique({
-      select: {
-        name: true,
-        email: true,
-        gender: true,
-        age: true,
-        height: true,
-        weight: true,
-        profileImg: true,
-        activityLevel: true,
-        goal: true,
-        tdee: true,
-        isActive: true
-      },
+      select: this.filter,
       where: {id}
     });
     return result;
@@ -71,7 +73,7 @@ export class UsersService {
   }
 
   async login(user: UpdatedUserDto) {
-    await this.prisma.users.findFirst({where: {accName: user.accName, password: user.password}});
-    return {message: 'Logined sucessfuly!'};
+    const result = await this.prisma.users.findFirst({select: this.filter, where: {accName: user.accName, password: user.password}});
+    return {success: true, message: 'Logined sucessfuly!', data: result};
   }
 }

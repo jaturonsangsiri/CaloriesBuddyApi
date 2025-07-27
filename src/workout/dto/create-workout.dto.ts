@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, IsNumber, IsOptional, MaxLength } from 'class-validator';
-import { MuscleType, WorkoutDifficulty, WorkoutEquipment } from 'generated/prisma';
+import { MuscleType, WorkoutDifficulty } from 'generated/prisma';
 
 export class CreateWorkoutDto {
     @IsString()
@@ -21,9 +21,6 @@ export class CreateWorkoutDto {
 
     @IsOptional()
     difficulty: WorkoutDifficulty;
-
-    @IsOptional()
-    equipments: WorkoutEquipment;
 
     @IsOptional()
     @IsString()
