@@ -62,8 +62,8 @@ export class FoodsService {
     return { message: 'Updated food successfull!' };
   }
 
-  async updateFoodFav(id: string, updateFoodFavDto: UpdateFoodFavDto) {
-    await this.prisma.userFavFoods.update({where: {id}, data: updateFoodFavDto});
+  async updateFoodFav(foodFavId: any, updateFoodFavDto: UpdateFoodFavDto) {
+    await this.prisma.userFavFoods.update({where: {id: foodFavId}, data: {foodId: updateFoodFavDto.foodId}});
     return {message: 'Update food favorite successful!'};
   }
 

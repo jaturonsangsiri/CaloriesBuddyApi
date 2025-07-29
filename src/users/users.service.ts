@@ -34,6 +34,11 @@ export class UsersService {
     return await this.prisma.users.findMany({where: search, orderBy: [{createdAt: "desc"}]})
   }
 
+  async findByName(name: string) {
+    const user = await this.prisma.users.findFirst({where: {accName: name, isActive: true}});
+    return user;
+  }
+
   async findOne(id: string) {
     const result = await this.prisma.users.findUnique({
       select: this.filter,
@@ -68,7 +73,7 @@ export class UsersService {
   }
 
   async delete(id: string) {
-    await this.prisma.users.delete({where: {id}});
+    await this.prisma.users.update({where: {id}, data: {isActive: false}});
     return {message: 'Deleted user successfull!'};
   }
 

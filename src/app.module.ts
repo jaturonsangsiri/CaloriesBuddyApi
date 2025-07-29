@@ -20,10 +20,14 @@ import { ActivitiesModule } from './activities/activities.module';
 import { MealController } from './meal/meal.controller';
 import { MealService } from './meal/meal.service';
 import { MealModule } from './meal/meal.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthController } from './auth/auth.controller';
 
 @Module({
-  imports: [PrismaModule, UsersModule, FoodsModule, NotificationModule, WorkoutModule, ActivitiesModule, MealModule],
-  controllers: [AppController, UsersController, FoodsController, NotificationController, WorkoutController, ActivitiesController, MealController],
-  providers: [AppService, UsersService, FoodsService, NotificationService, WorkoutService, ActivitiesService, MealService],
+  imports: [ConfigModule.forRoot(), AuthModule, PrismaModule, UsersModule, FoodsModule, NotificationModule, WorkoutModule, ActivitiesModule, MealModule],
+  controllers: [AppController, AuthController, UsersController, FoodsController, NotificationController, WorkoutController, ActivitiesController, MealController],
+  providers: [AppService, AuthService, UsersService, FoodsService, NotificationService, WorkoutService, ActivitiesService, MealService],
 })
 export class AppModule {}
