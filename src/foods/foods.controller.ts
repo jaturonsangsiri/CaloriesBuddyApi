@@ -25,7 +25,12 @@ export class FoodsController {
   }
 
   @Get('foodFav/:id')
-  foodFav(@Param('id') id: string) {
+  foodFav(@Param('id') id: string, @Request() req: any) {
+    const currentUser = req.user;
+    // Check id from token is equal to id param
+    if (currentUser.userId !== id) {
+      throw new ForbiddenException('Invalid user');
+    }
     return this.foodsService.foodFav(id);
   } 
 
@@ -40,12 +45,7 @@ export class FoodsController {
   }
 
   @Patch('foodFav/:id')
-  updateFoodFav(@Param('id') id: string, @Body() updateFoodFavDto: UpdateFoodFavDto, @Request() req: any) {
-    const currentUser = req.user;
-    // Check id from token is equal to id param
-    if (currentUser.userId !== id) {
-      throw new ForbiddenException('Invalid user');
-    }
+  updateFoodFav(@Param('id') id: string, @Body() updateFoodFavDto: UpdateFoodFavDto) {
     return this.foodsService.updateFoodFav(updateFoodFavDto.foodFavId, updateFoodFavDto);
   }
 

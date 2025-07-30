@@ -19,7 +19,12 @@ export class WorkoutController {
   }
 
   @Get('workoutFav/:id')
-  workoutFav(@Param('id') id: string) {
+  workoutFav(@Param('id') id: string, @Request() req: any) {
+    const currentUser = req.user;
+    // Check id from token is equal to id param
+    if (currentUser.userId !== id) {
+      throw new ForbiddenException('Invalid user');
+    }
     return this.workoutService.workoutFav(id);
   }
 
@@ -62,10 +67,10 @@ export class WorkoutController {
   }
 
   @Delete('workoutFav/:id')
-  deleteWorkoutFav(@Param('id') id: string, @Body() userId: string, @Request() req: any) {
+  deleteWorkoutFav(@Param('id') id: string, @Body() createWorkoutFavDto: CreateWorkoutFavDto, @Request() req: any) {
     const currentUser = req.user;
     // Check id from token is equal to id param
-    if (currentUser.userId !== userId) { 
+    if (currentUser.userId !== createWorkoutFavDto.userId) { 
       throw new ForbiddenException('Invalid user');
     }
     return this.workoutService.deleteWorkoutFav(id);

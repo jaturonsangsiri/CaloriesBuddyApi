@@ -6,9 +6,7 @@ export class CreateWorkoutFavDto {
     @MaxLength(100)
     userId: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(100)
+    @IsOptional()
     workoutId: string;
 
     @IsOptional()

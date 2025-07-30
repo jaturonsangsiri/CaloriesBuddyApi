@@ -6,14 +6,14 @@ export class CreateAddMealDto {
 
     @IsOptional()
     @IsString()
-    note?: string;
+    note: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     mealId: string;
 
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     foodId: string;
 
     @IsOptional()

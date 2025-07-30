@@ -1,15 +1,22 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, ForbiddenException, Get, Param, Patch, Post, Query, UseGuards, Request } from '@nestjs/common';
 import { MealService } from './meal.service';
 import { CreateMealDto } from './dto/meal/create-meal.dto';
 import { UpdateMealDto } from './dto/meal/update-meal.dto';
 import { CreateAddMealDto } from './dto/add_meal/create-add-meal.dto';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @Controller('meal')
+@UseGuards(AuthGuard)
 export class MealController {
   constructor(private readonly mealService: MealService) {}
 
   @Get(':id')
-  getMeal(@Param('id') id: string, @Query('filter') filter: string) {
+  getMeal(@Param('id') id: string, @Query('filter') filter: string, @Request() req: any) {
+    const currentUser = req.user;
+    // Check id from token is equal to id param
+    if (currentUser.userId !== id) {
+      throw new ForbiddenException('Invalid user');
+    }
     return this.mealService.getMeal(id, filter);
   }
 
@@ -19,7 +26,12 @@ export class MealController {
   }
 
   @Post()
-  Meal(@Body() CreateMealDto: CreateMealDto) {
+  Meal(@Body() CreateMealDto: CreateMealDto, @Request() req: any) {
+    const currentUser = req.user;
+    // Check id from token is equal to id param
+    if (currentUser.userId !== CreateMealDto.userId) {
+      throw new ForbiddenException('Invalid user');
+    }
     return this.mealService.Meal(CreateMealDto);
   }
   
