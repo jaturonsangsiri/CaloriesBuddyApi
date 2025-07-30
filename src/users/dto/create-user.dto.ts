@@ -1,68 +1,68 @@
-import { IsString, IsNumber, IsOptional, IsEmail, IsBoolean, MaxLength} from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsEmail, IsBoolean, MaxLength } from 'class-validator';
 import { activityLevel, ExerciseGoal, Gender, Roles } from 'generated/prisma';
 
 export class CreateUserDto {
-    @IsOptional()
-    @IsString()
-    @MaxLength(150)
-    name: string;
+  @IsOptional()
+  @IsString()
+  @MaxLength(150)
+  name: string;
 
-    @IsOptional()
-    @IsString()
-    @MaxLength(150)
-    accName: string;
+  @IsOptional()
+  @IsString()
+  @MaxLength(150)
+  accName: string;
 
-    @IsOptional()
-    @IsString()
-    @MaxLength(150)
-    password: string;
+  @IsOptional()
+  @IsString()
+  @MaxLength(150)
+  password: string;
 
-    @IsOptional()
-    @IsEmail()
-    @MaxLength(150)
-    email: string;
+  @IsOptional()
+  @IsEmail()
+  @MaxLength(150)
+  email: string;
 
-    @IsOptional()
-    @IsString()
-    gender: Gender;
+  @IsOptional()
+  @IsString()
+  gender: Gender;
 
-    @IsOptional()
-    @IsNumber()
-    age: number;
+  @IsOptional()
+  @IsNumber()
+  age: number;
 
-    @IsOptional()
-    @IsNumber()
-    height: number;
+  @IsOptional()
+  @IsNumber()
+  height: number;
 
-    @IsOptional()
-    @IsNumber()
-    weight: number;
+  @IsOptional()
+  @IsNumber()
+  weight: number;
 
-    @IsOptional()
-    @IsString()
-    profileImg: string;
+  @IsOptional()
+  @IsString()
+  profileImg: string;
 
-    @IsOptional()
-    activityLevel: activityLevel;
+  @IsOptional()
+  activityLevel: activityLevel;
 
-    @IsOptional()
-    @IsString()
-    goal: ExerciseGoal;
+  @IsOptional()
+  @IsString()
+  goal: ExerciseGoal;
 
-    @IsOptional()
-    @IsNumber()
-    tdee: number;
+  @IsOptional()
+  @IsNumber()
+  tdee: number;
 
-    @IsOptional()
-    role: Roles;
-    
-    @IsOptional()
-    @IsBoolean()
-    isActive: boolean;
+  @IsOptional()
+  role: Roles;
 
-    @IsOptional()
-    createdAt: Date;
+  @IsOptional()
+  @IsBoolean()
+  isActive: boolean;
 
-    @IsOptional()
-    updatedAt: Date;
+  @IsOptional()
+  createdAt: Date;
+
+  @IsOptional()
+  updatedAt: Date;
 }

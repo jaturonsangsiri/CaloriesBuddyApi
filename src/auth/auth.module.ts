@@ -8,10 +8,10 @@ import { UsersService } from 'src/users/users.service';
 
 @Module({
   imports: [
-    UsersModule, 
+    UsersModule,
     ConfigModule,
     JwtModule.registerAsync({
-      global: true, 
+      global: true,
       imports: [ConfigModule],
       useFactory: async (configSevice: ConfigService) => ({
         secret: configSevice.get<string>('JWT_SECRET'),
@@ -25,4 +25,4 @@ import { UsersService } from 'src/users/users.service';
   providers: [AuthService, UsersService],
   controllers: [AuthController]
 })
-export class AuthModule {}
+export class AuthModule { }

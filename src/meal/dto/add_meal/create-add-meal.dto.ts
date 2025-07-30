@@ -1,24 +1,24 @@
 import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateAddMealDto {
-    @IsNumber()
-    quantity: number;
+  @IsNumber()
+  quantity: number;
 
-    @IsOptional()
-    @IsString()
-    note: string;
+  @IsOptional()
+  @IsString()
+  note: string;
 
-    @IsOptional()
-    @IsString()
-    mealId: string;
+  @IsOptional()
+  @IsString()
+  mealId: string;
 
-    @IsOptional()
-    @IsString()
-    foodId: string;
+  @IsOptional()
+  @IsString()
+  foodId: string;
 
-    @IsOptional()
-    createdAt: Date;
+  @IsOptional()
+  createdAt: Date;
 
-    @IsOptional()
-    updatedAt: Date;
+  @IsOptional()
+  updatedAt: Date;
 }

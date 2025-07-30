@@ -2,42 +2,42 @@ import { IsString, IsNotEmpty, IsNumber, IsOptional, IsDate, MaxLength } from 'c
 import { FoodCategory } from 'generated/prisma';
 
 export class CreateFoodDto {
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(100)
-    name: string;
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(100)
+  name: string;
 
-    @IsOptional()
-    @IsNumber()
-    calories: number;
+  @IsOptional()
+  @IsNumber()
+  calories: number;
 
-    @IsOptional()
-    @IsNumber()
-    carb: number;
+  @IsOptional()
+  @IsNumber()
+  carb: number;
 
-    @IsOptional()
-    @IsNumber()
-    protein: number;
+  @IsOptional()
+  @IsNumber()
+  protein: number;
 
-    @IsOptional()
-    @IsNumber()
-    fat: number;
+  @IsOptional()
+  @IsNumber()
+  fat: number;
 
-    @IsOptional()
-    @IsString()
-    foodCategory: FoodCategory;
+  @IsOptional()
+  @IsString()
+  foodCategory: FoodCategory;
 
-    @IsOptional()
-    image: string;
+  @IsOptional()
+  image: string;
 
-    @IsOptional()
-    createdAt: Date;
+  @IsOptional()
+  createdAt: Date;
 
-    @IsOptional()
-    updatedAt: Date;
+  @IsOptional()
+  updatedAt: Date;
 
-    @IsOptional()
-    @IsString()
-    @MaxLength(150)
-    updatedBy: string;
+  @IsOptional()
+  @IsString()
+  @MaxLength(150)
+  updatedBy: string;
 }
