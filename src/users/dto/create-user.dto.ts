@@ -54,6 +54,34 @@ export class CreateUserDto {
   tdee: number;
 
   @IsOptional()
+  @IsNumber()
+  carbohydrate: number;
+
+  @IsOptional()
+  @IsNumber()
+  maxCabohydrate: number;
+
+  @IsOptional()
+  @IsNumber()
+  protien: number;
+
+  @IsOptional()
+  @IsNumber()
+  maxProtien: number;
+
+  @IsOptional()
+  @IsNumber()
+  fat: number;
+
+  @IsOptional()
+  @IsNumber()
+  maxFat: number;
+
+  @IsOptional()
+  @IsNumber()
+  calories: number;
+
+  @IsOptional()
   role: Roles;
 
   @IsOptional()

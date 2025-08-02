@@ -38,7 +38,7 @@ model Foods {
   updatedAt    DateTime     @default(now())
   updatedBy    String
 
-  foodFav UserFavFoods[]
+  foodFav  UserFavFoods[]
   mealItem MealItem[]
 }
 
@@ -69,23 +69,30 @@ enum Roles {
 
 // users
 model Users {
-  id            String        @id @default(cuid())
-  name          String        @unique
-  accName       String        @unique
-  password      String
-  email         String
-  gender        Gender
-  age           Int
-  height        Int
-  weight        Int
-  profileImg    String        @default("")
-  activityLevel activityLevel @default(MEDIUM)
-  goal          ExerciseGoal  @default(LOSE_WEIGHT)
-  tdee          Int           @default(0)
-  role          Roles         @default(USER)
-  isActive      Boolean       @default(true)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @default(now())
+  id             String        @id @default(cuid())
+  name           String        @unique
+  accName        String        @unique
+  password       String
+  email          String
+  gender         Gender
+  age            Int
+  height         Int
+  weight         Int
+  profileImg     String        @default("")
+  activityLevel  activityLevel @default(MEDIUM)
+  goal           ExerciseGoal  @default(LOSE_WEIGHT)
+  carbohydrate   Float
+  maxCabohydrate Float
+  protien        Float
+  maxProtien     Float
+  fat            Float
+  maxFat         Float
+  calories       Float
+  tdee           Int           @default(0)
+  role           Roles         @default(USER)
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @default(now())
 
   meal          Meal[]
   foodFav       UserFavFoods[]
@@ -109,8 +116,8 @@ model Meal {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  userId String
-  user   Users  @relation(fields: [userId], references: [id])
+  userId    String
+  user      Users      @relation(fields: [userId], references: [id])
   mealItems MealItem[]
 }
 
@@ -122,10 +129,10 @@ model MealItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  mealId    String
-  meal      Meal     @relation(fields: [mealId], references: [id])
-  foodId    String
-  food      Foods    @relation(fields: [foodId], references: [id])
+  mealId String
+  meal   Meal   @relation(fields: [mealId], references: [id])
+  foodId String
+  food   Foods  @relation(fields: [foodId], references: [id])
 }
 
 // Favorite food list
