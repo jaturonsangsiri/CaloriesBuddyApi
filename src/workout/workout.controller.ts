@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards, Request, ForbiddenException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards, Request, ForbiddenException, Query } from '@nestjs/common';
 import { WorkoutService } from './workout.service';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
@@ -14,8 +14,8 @@ export class WorkoutController {
   constructor(private readonly workoutService: WorkoutService) { }
 
   @Get()
-  findAll() {
-    return this.workoutService.findAll();
+  findAll(@Query('filter') filter: string) {
+    return this.workoutService.findAll(filter);
   }
 
   @Get('workoutFav/:id')

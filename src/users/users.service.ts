@@ -8,6 +8,7 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) { }
   filter = {
     id: true,
+    accName: true,
     name: true,
     email: true,
     gender: true,
@@ -52,7 +53,7 @@ export class UsersService {
       select: this.filter,
       where: { id }
     });
-    return result;
+    return { success: true, message: 'Get Profile Success!', data: result };
   }
 
   async create(createUserDto: CreateUserDto) {

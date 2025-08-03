@@ -8,3 +8,8 @@ insert into "Foods" (id, name, description, calories, carb, fat, protein, image,
 insert into "Users" (id, name, "accName", password, email, gender, age, height, weight, "profileImg", "activityLevel", goal, "isActive", carbohydrate, "maxCabohydrate", protien, "maxProtien", fat, "maxFat", calories, tdee, role) values
 ('cmdlq32yb0000vbh4qhwoprqv',	'testName',	'test1',	'1234',	'test@hot.com',	'MALE',	25,	167,	60, '',		'MEDIUM',	'GAIN_WEIGHT',	true, 0, 0, 0, 0, 0, 0, 0, 0,	'USER'),
 ('cmdlrzpy10008vb5sge92bwt4',	'abc',	'admin1',	'1234',	'tea@hotmail.com',	'MALE',	0,	0,	0, '',		'MEDIUM',	'GAIN_WEIGHT',	true, 0, 0, 0, 0, 0, 0, 0, 0,	'ADMIN');
+
+insert into "Workout" (id, name, detail, muscle, "calorieBurn", difficulty, image, video) values
+('cmdud6qzl0000vb3kyf7iqtwl',	'Brench Press Barbell1',	'ใช้บาในการเล่นกับเบาะ ในท่านอน',	'CHEST',	80,	'INTERMEDIATE',	'1234',	'51'),
+('cmdud761g0001vb3k25cocg6x',	'Brench Press Barbell2',	'ใช้บาในการเล่นกับเบาะ ในท่านอน',	'CHEST',	80,	'INTERMEDIATE',	'1234',	'51'),
+('cmdud78v40002vb3k2bfkxpvx',	'Brench Press Barbell3',	'ใช้บาในการเล่นกับเบาะ ในท่านอน',	'CHEST',	80,	'INTERMEDIATE',	'1234',	'51');
