@@ -15,18 +15,19 @@ export class MealService {
         OR: [{ name: { contains: filter } }]
       }
     }
-    return await this.prisma.meal.findMany({
-      include: {mealItems: {include: {food: true}}},
+    var result = await this.prisma.meal.findMany({
+      include: { mealItems: { include: { food: true } } },
       where: { userId: id },
       orderBy: [{ createdAt: "desc" }]
     });
+    return { success: true, message: 'Get meals success!', data: result };
   }
 
   async getMealItem(id: string) {
     return await this.prisma.mealItem.findMany({
-      include: {food: true},
-      where: {mealId: id},
-      orderBy: [{createdAt: "desc"}]
+      include: { food: true },
+      where: { mealId: id },
+      orderBy: [{ createdAt: "desc" }]
     })
   }
 
@@ -36,13 +37,13 @@ export class MealService {
   }
 
   async addMeal(createAddMealDto: CreateAddMealDto) {
-    await this.prisma.mealItem.create({data: createAddMealDto});
-    return {message: 'Added meal food successful!'};
+    await this.prisma.mealItem.create({ data: createAddMealDto });
+    return { message: 'Added meal food successful!' };
   }
 
   async addMealItem(createAddMealDto: CreateAddMealDto) {
-    await this.prisma.mealItem.create({data: createAddMealDto});
-    return {message: 'Added meal item successful!'};
+    await this.prisma.mealItem.create({ data: createAddMealDto });
+    return { message: 'Added meal item successful!' };
   }
 
   async updateMeal(id: string, updateMealDto: UpdateMealDto) {
@@ -51,8 +52,8 @@ export class MealService {
   }
 
   async updateMealItem(id: string, createAddMealDto: CreateAddMealDto) {
-    await this.prisma.mealItem.update({where: {id}, data: createAddMealDto});
-    return {message: 'Updated meal item successful!'};
+    await this.prisma.mealItem.update({ where: { id }, data: createAddMealDto });
+    return { message: 'Updated meal item successful!' };
   }
 
   async deleteMeal(id: string) {
@@ -61,7 +62,7 @@ export class MealService {
   }
 
   async deleteMealItem(id: string) {
-    await this.prisma.mealItem.delete({where: {id}});
+    await this.prisma.mealItem.delete({ where: { id } });
     return { message: 'Delete successful!' };
   }
 }
