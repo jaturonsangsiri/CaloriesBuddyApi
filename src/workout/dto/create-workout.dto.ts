@@ -9,7 +9,7 @@ export class CreateWorkoutDto {
 
   @IsOptional()
   @IsString()
-  @MaxLength(100)
+  @MaxLength(300)
   detail: string;
 
   @IsOptional()

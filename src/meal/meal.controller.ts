@@ -20,6 +20,11 @@ export class MealController {
     return this.mealService.getMeal(id, filter);
   }
 
+  @Get('totalCalories/:id')
+  getTotalCalories(@Param('id') id: string) {
+    return this.mealService.getTotalCalories(id);
+  }
+
   @Get('mealItem/:id')
   getMealItem(@Param('id') id: string) {
     return this.mealService.getMealItem(id);

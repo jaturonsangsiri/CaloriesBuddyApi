@@ -12,15 +12,29 @@ export class MealService {
     let search = {};
     if (filter) {
       search = {
-        OR: [{ name: { contains: filter } }]
+        userId: id,
+        type: filter
       }
     }
     var result = await this.prisma.meal.findMany({
       include: { mealItems: { include: { food: true } } },
-      where: { userId: id },
+      where: search,
       orderBy: [{ createdAt: "desc" }]
     });
     return { success: true, message: 'Get meals success!', data: result };
+  }
+
+  async getTotalCalories(id: string) {
+    let totalCalories = 0;
+    var result = await this.prisma.mealItem.findMany({
+      include: { food: true },
+      where: { mealId: id },
+      orderBy: [{ createdAt: "desc" }]
+    });
+    for (let index = 0; index < result.length; index++) {
+      totalCalories += result[index].food.calories;
+    }
+    return {success: true, message: 'Total calories', data: totalCalories};
   }
 
   async getMealItem(id: string) {
